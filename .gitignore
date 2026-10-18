@@ -1,0 +1,28 @@
+# Build & Dependency Directories
+target/
+node_modules/
+dist/
+.angular/
+.wrangler/
+
+# Environment and Secret Files
+.dev.vars
+.env
+.env.*
+!.env.example
+!.dev.vars.example
+*.pem
+*.key
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS and Log files
+*.log
+Thumbs.db
+.DS_Store

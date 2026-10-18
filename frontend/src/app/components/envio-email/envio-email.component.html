@@ -1,0 +1,86 @@
+<div class="card-contenedor">
+  <div class="card-cabecera">
+    <div class="icono-correo">✉️</div>
+    <h2 class="card-titulo">Enviar Correo Electrónico</h2>
+    <p class="card-subtitulo">Completa los campos para enviar un mensaje a través del sistema.</p>
+  </div>
+
+  <!-- Alerta de éxito -->
+  <div *ngIf="mensajeExito" class="alerta alerta-exito" role="alert">
+    <span class="alerta-icono">✓</span>
+    <span>{{ mensajeExito }}</span>
+  </div>
+
+  <!-- Alerta de error -->
+  <div *ngIf="mensajeError" class="alerta alerta-error" role="alert">
+    <span class="alerta-icono">✕</span>
+    <span>{{ mensajeError }}</span>
+  </div>
+
+  <form [formGroup]="formulario" (ngSubmit)="enviarCorreo()" novalidate class="formulario">
+    
+    <!-- Campo Destinatario -->
+    <div class="grupo-campo">
+      <label for="to" class="etiqueta">Destinatario <span class="obligatorio">*</span></label>
+      <input
+        id="to"
+        type="email"
+        formControlName="to"
+        placeholder="ejemplo@correo.com"
+        class="input-control"
+        [class.input-invalido]="toControl?.invalid && (toControl?.dirty || toControl?.touched)"
+      />
+      <div *ngIf="toControl?.invalid && (toControl?.dirty || toControl?.touched)" class="mensaje-error">
+        <small *ngIf="toControl?.errors?.['required']">El destinatario es obligatorio.</small>
+        <small *ngIf="toControl?.errors?.['email']">Debe ser un correo electrónico válido.</small>
+      </div>
+    </div>
+
+    <!-- Campo Asunto -->
+    <div class="grupo-campo">
+      <label for="subject" class="etiqueta">Asunto <span class="obligatorio">*</span></label>
+      <input
+        id="subject"
+        type="text"
+        formControlName="subject"
+        placeholder="Asunto del correo"
+        maxlength="200"
+        class="input-control"
+        [class.input-invalido]="subjectControl?.invalid && (subjectControl?.dirty || subjectControl?.touched)"
+      />
+      <div *ngIf="subjectControl?.invalid && (subjectControl?.dirty || subjectControl?.touched)" class="mensaje-error">
+        <small *ngIf="subjectControl?.errors?.['required']">El asunto es obligatorio.</small>
+        <small *ngIf="subjectControl?.errors?.['maxlength']">El asunto no debe superar los 200 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Campo Mensaje (Body) -->
+    <div class="grupo-campo">
+      <label for="body" class="etiqueta">Mensaje (HTML o Texto) <span class="obligatorio">*</span></label>
+      <textarea
+        id="body"
+        formControlName="body"
+        rows="5"
+        placeholder="Escribe aquí el contenido del mensaje..."
+        class="input-control textarea-control"
+        [class.input-invalido]="bodyControl?.invalid && (bodyControl?.dirty || bodyControl?.touched)"
+      ></textarea>
+      <div *ngIf="bodyControl?.invalid && (bodyControl?.dirty || bodyControl?.touched)" class="mensaje-error">
+        <small *ngIf="bodyControl?.errors?.['required']">El mensaje es obligatorio.</small>
+      </div>
+    </div>
+
+    <!-- Botón de acción -->
+    <div class="acciones">
+      <button
+        type="submit"
+        id="btn-enviar"
+        class="btn-enviar"
+        [disabled]="formulario.invalid || enviando"
+      >
+        <span *ngIf="enviando" class="spinner"></span>
+        {{ enviando ? 'Enviando...' : 'Enviar correo' }}
+      </button>
+    </div>
+  </form>
+</div>
