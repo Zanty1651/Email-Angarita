@@ -1,0 +1,21 @@
+{
+  "name": "email-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Función serverless en Cloudflare Workers para conectar con SendGrid",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241022.0",
+    "typescript": "^5.6.3",
+    "wrangler": "^3.80.5"
+  },
+  "allowScripts": {
+    "esbuild@0.17.19": true,
+    "workerd@1.20250718.0": true
+  }
+}
