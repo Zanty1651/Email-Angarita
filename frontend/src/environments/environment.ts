@@ -6,7 +6,6 @@
  * Ejemplo: 'https://mi-backend-production.up.railway.app'
  */
 export const environment = {
-  production: true,
-  // CAMBIAR POR LA URL REAL DE RAILWAY CUANDO SE DESPLIEGUE EL BACKEND
-  apiUrl: 'https://CAMBIAR-POR-URL-DE-RAILWAY'
+  production: false,
+  apiUrl: 'https://email-angarita.onrender.com'
 };
