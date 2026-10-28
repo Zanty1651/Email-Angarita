@@ -4,6 +4,14 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Variables de entorno y secretos ###
+.env
+.dev.vars
+
+### Node ###
+node_modules/
+.wrangler/
+
 ### STS ###
 .apt_generated
 .classpath

@@ -1,14 +1,10 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
     name: email-service
-  main:
-    lazy-initialization: true
-    banner-mode: off
 
-sendgrid:
-  api-key: ${SENDGRID_API_KEY}
-  from-email: ${SENDGRID_FROM_EMAIL}
-  from-name: ${SENDGRID_FROM_NAME:Mi Aplicación}
+worker:
+  url: ${WORKER_URL}
+  token: ${WORKER_TOKEN}

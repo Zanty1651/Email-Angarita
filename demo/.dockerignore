@@ -1,4 +1,6 @@
-target
-node_modules
-.git
-.vscode
+target/
+.git/
+.idea/
+.vscode/
+*.iml
+email-worker/

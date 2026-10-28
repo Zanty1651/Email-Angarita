@@ -1,17 +1,13 @@
-# Etapa 1: compilar el proyecto con Maven
-FROM eclipse-temurin:17-jdk AS build
+# Etapa 1: compilar el proyecto
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY .mvn .mvn
-COPY mvnw pom.xml ./
-# Evita errores de saltos de línea de Windows en el script mvnw
-RUN sed -i 's/\r$//' mvnw && chmod +x mvnw
-RUN ./mvnw dependency:go-offline
-COPY src src
-RUN ./mvnw clean package -DskipTests
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Etapa 2: imagen final, solo con el JRE y el jar
-FROM eclipse-temurin:17-jre
+# Etapa 2: imagen final, solo con lo necesario para ejecutar
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-XX:TieredStopAtLevel=1", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
